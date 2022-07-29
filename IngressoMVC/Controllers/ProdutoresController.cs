@@ -62,13 +62,10 @@ namespace IngressoMVC.Controllers
 
         public IActionResult Atualizar(int? id)
         {
-            if(id == null)
-                return NotFound();
+            var result = _context.Filmes.FirstOrDefault(x => x.Id == id);
 
-            var result = _context.Produtores.FirstOrDefault(p => p.Id == id);
-            
-            if(result == null)
-                return View();
+            if (result == null)
+                return View("NotFound");
 
             return View(result);
         }

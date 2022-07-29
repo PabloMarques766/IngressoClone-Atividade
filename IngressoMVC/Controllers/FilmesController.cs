@@ -22,7 +22,7 @@ namespace IngressoMVC.Controllers
         public IActionResult Criar() => View();
 
         [HttpPost]
-        IActionResult Criar(PostFilmeDTO filmeDto)
+        IActionResult Criar(GetFlimesDto filmeDto)
         {
             Filme filme = new Filme
                 (
@@ -39,7 +39,7 @@ namespace IngressoMVC.Controllers
 
             foreach (var categoria in filmeDto.Categorias)
             {
-                int? categoriaId = _context.Categorias.Where(c => c.Nome == categoria).FirstOrDefault().Id;
+                int? categoriaId = _context.Categorias.Where(c => c.Id == categoria).FirstOrDefault().Id;
 
                 if (categoriaId != null)
                 {
@@ -70,7 +70,7 @@ namespace IngressoMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Atualizar(int id, PostFilmeDTO filmeDto)
+        public IActionResult Atualizar(int id, GetFlimesDto filmeDto)
         {
             var result = _context.Filmes.FirstOrDefault(x => x.Id == id);
 

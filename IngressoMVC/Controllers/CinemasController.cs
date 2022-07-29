@@ -39,7 +39,7 @@ namespace IngressoMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar(PostCinemaDTO cinemaDto)
+        public IActionResult Criar( GetCinemaDto cinemaDto)
         {
             if (!ModelState.IsValid) return View(cinemaDto);
 
@@ -61,7 +61,7 @@ namespace IngressoMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Atualizar(int id, PostCinemaDTO cinemaDTO)
+        public IActionResult Atualizar(int id, GetCinemaDto cinemaDTO)
         {
             var result = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
             result.AtualizarDados(cinemaDTO.Nome, cinemaDTO.Descricao, cinemaDTO.LogoURL);

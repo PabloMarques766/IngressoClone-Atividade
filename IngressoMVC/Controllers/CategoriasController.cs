@@ -22,7 +22,7 @@ namespace IngressoMVC.Controllers
         public IActionResult Criar() => View();
 
         [HttpPost]
-        public IActionResult Criar(PostCategoriaDTO categoriaDto)
+        public IActionResult Criar(GetCategoriaDto categoriaDto)
         {
             if(!ModelState.IsValid) return View(categoriaDto);
             Categoria categoria = new Categoria(categoriaDto.Nome);
@@ -33,17 +33,18 @@ namespace IngressoMVC.Controllers
 
         public IActionResult Atualizar(int? id)
         {
-            if (id == null) return NotFound();
+            var result = _context.Filmes.FirstOrDefault(x => x.Id == id);
 
-            var result = _context.Categorias.FirstOrDefault(a => a.Id == id);
+            if (result == null)
+                return View("NotFound");
 
-            if (result == null) return View();          
-            
+            return View(result);
+
             return View(result);
         }
 
         [HttpPost]
-        public IActionResult Atualizar(int id, PostCategoriaDTO categoriaDto)
+        public IActionResult Atualizar(int id, GetCategoriaDto categoriaDto)
         {
             var result = _context.Categorias.FirstOrDefault(a => a.Id == id);
 
